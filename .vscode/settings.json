@@ -1,6 +1,7 @@
 {
 "editor.tabSize": 4,
 "conventionalCommits.scopes": [
-    "requisito 1.1"
+    "requisito 1.1",
+    "requisito 2"
 ]
 }
