@@ -22,6 +22,14 @@ def get_never_ordered_dishes(orders, customer):
     return dishes - customer_orders
 
 
+def get_never_visited_days(orders, customer):
+    days = set(order[2] for order in orders)
+    customer_days = set(
+        order[2] for order in orders if order[0] == customer
+    )
+    return days - customer_days
+
+
 def analyze_log(path_to_file):
     if not path_to_file.endswith(".csv"):
         raise FileNotFoundError(f"Extensão inválida: '{path_to_file}'")
@@ -37,10 +45,12 @@ def analyze_log(path_to_file):
         orders, "arnaldo", "hamburguer"
     )
     joao_never_ordered_dishes = get_never_ordered_dishes(orders, "joao")
+    joao_never_visited_days = get_never_visited_days(orders, "joao")
 
     with open("data/mkt_campaign.txt", mode="w", encoding="utf-8") as file:
         file.write(
             f"{maria_most_ordered_dish}\n"
             f"{count_arnaldo_burgers}\n"
             f"{joao_never_ordered_dishes}\n"
+            f"{joao_never_visited_days}\n"
         )
